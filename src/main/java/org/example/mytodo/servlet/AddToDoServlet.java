@@ -31,14 +31,14 @@ public class AddToDoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String title = req.getParameter("title");
-        String finishDate = req.getParameter("finishDate");
+        Date finishDate = DateUtil.stringToDate(req.getParameter("finishDate"));
 
         User user = (User) req.getSession().getAttribute("user");
 
         todoManager.add(ToDo.builder()
                 .title(title)
                 .createdDate(new Date())
-                .finishDate(DateUtil.stringToDate(finishDate))
+                .finishDate(finishDate)
                 .user(user)
                 .status(ToDoStatus.NEW)
                 .build());
