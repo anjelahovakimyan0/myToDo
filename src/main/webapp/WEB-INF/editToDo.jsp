@@ -68,17 +68,12 @@
                     <div class="col" style="width: 100%; height: 45px;">
                         Status:
                         <select name="status">
-                            <% if(todo.getStatus() == ToDoStatus.NEW) { %>
+                            <% if (todo.getStatus() == ToDoStatus.NEW) { %>
                             <option value="<%=todo.getStatus()%>" selected></option>
-                            <% } else { %>
-                            <option value="<%=ToDoStatus.DONE%>>"></option>
+                            <% } else if (todo.getStatus() == ToDoStatus.DONE) { %>
+                            <option value="<%=ToDoStatus.DONE%>" selected></option>
                             <% } %>
-                            <% if(todo.getStatus() == ToDoStatus.DONE) { %>
-                            <option value="<%=todo.getStatus()%>" selected></option>
-                            <% } else { %>
-                            <option value="<%=ToDoStatus.NEW%>"></option>
-                            <% } %>
-                        </select>.
+                        </select>
                         <input type="submit" value="Edit">
                     </div>
                 </div>
