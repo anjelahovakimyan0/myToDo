@@ -36,7 +36,7 @@ public class UserManager {
                         .id(resultSet.getInt("id"))
                         .name(resultSet.getString("name"))
                         .surname(resultSet.getString("surname"))
-                        .email(email)
+                        .email(resultSet.getString("email"))
                         .password(resultSet.getString("password"))
                         .build();
             }
@@ -52,7 +52,7 @@ public class UserManager {
             ResultSet resultSet = ps.executeQuery();
             if (resultSet.next()) {
                 return User.builder()
-                        .id(userId)
+                        .id(resultSet.getInt("id"))
                         .name(resultSet.getString("name"))
                         .surname(resultSet.getString("surname"))
                         .email(resultSet.getString("email"))

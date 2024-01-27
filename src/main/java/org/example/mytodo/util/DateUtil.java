@@ -9,7 +9,7 @@ import java.util.Date;
 @UtilityClass
 public class DateUtil {
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public static Date stringToDate(String dateStr) {
         try {

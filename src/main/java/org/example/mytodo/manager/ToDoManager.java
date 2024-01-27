@@ -34,8 +34,8 @@ public class ToDoManager {
     }
 
     public ToDo getToDoById(int id) {
-        String sql = "SELECT * FROM todo WHERE id = " + id;
-        try (Statement statement = connection.createStatement()) {
+        String sql = "SELECT * FROM todo WHERE id =" + id;
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
             ResultSet resultSet = statement.executeQuery(sql);
             if (resultSet.next()) {
                 return ToDo.builder()
@@ -60,7 +60,7 @@ public class ToDoManager {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 todos.add(ToDo.builder()
-                        .id(id)
+                        .id(resultSet.getInt("id"))
                         .title(resultSet.getString("title"))
                         .createdDate(DateUtil.stringToDate(resultSet.getString("created_date")))
                         .finishDate(DateUtil.stringToDate(resultSet.getString("finish_date")))
@@ -78,8 +78,8 @@ public class ToDoManager {
         String sql = "UPDATE todo SET title = ?, created_date = ?, finish_date = ?, user_id = ?, status = ? WHERE id = " + todo.getId();
         try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
             preparedStatement.setString(1, todo.getTitle());
-            preparedStatement.setString(2, String.valueOf(todo.getCreatedDate()));
-            preparedStatement.setString(3, String.valueOf(todo.getFinishDate()));
+            preparedStatement.setString(2, DateUtil.dateToString(todo.getCreatedDate()));
+            preparedStatement.setString(3, DateUtil.dateToString(todo.getFinishDate()));
             preparedStatement.setInt(4, todo.getUser().getId());
             preparedStatement.setString(5, String.valueOf(todo.getStatus()));
             preparedStatement.executeUpdate();

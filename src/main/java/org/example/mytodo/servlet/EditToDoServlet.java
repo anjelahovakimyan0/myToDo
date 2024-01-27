@@ -23,8 +23,8 @@ public class EditToDoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
-        req.setAttribute("todo", todoManager.getToDoById(id));
+        ToDo toDo = todoManager.getToDoById(Integer.parseInt(req.getParameter("id")));
+        req.setAttribute("todo", toDo);
         req.getRequestDispatcher("/WEB-INF/editToDo.jsp").forward(req, resp);
     }
 
